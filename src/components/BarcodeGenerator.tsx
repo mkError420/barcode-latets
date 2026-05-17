@@ -235,7 +235,7 @@ export default function BarcodeGenerator() {
                 <div className="flex gap-3 w-full max-w-sm">
                   <button
                     onClick={downloadBarcode}
-                    className="flex-1 h-12 bg-gray-600 text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 shadow-md shadow-blue-100"
+                    className="flex-1 h-12 bg-gray-600 text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-red-700 transition-colors flex items-center justify-center gap-2 shadow-md shadow-blue-100"
                   >
                     <Download className="w-4 h-4" />
                     Download PNG
