@@ -155,7 +155,7 @@ export default function BarcodeGenerator() {
               setCurrentValue('');
               barcodeRef.current = null;
             }}
-            className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-red-500 transition-colors"
+            className="flex items-center gap-1.5 text-[16px] font-bold text-slate-600 uppercase tracking-widest hover:text-red-500 transition-colors"
           >
             <RefreshCw className="w-3 h-3" />
             Reset Form
