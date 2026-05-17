@@ -40,15 +40,15 @@ function BarcodeDisplay({ value, name, id, onRef }: BarcodeDisplayProps) {
       initial={{ opacity: 0, scale: 0.95, y: 20 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95, y: 10 }}
-      className="bg-white p-6 sm:p-12 border-4 border-brand-black shadow-[12px_12px_0px_#121212] flex flex-col items-center gap-6 sm:gap-8 max-w-full"
+      className="bg-white p-6 sm:p-10 border border-slate-100 shadow-xl shadow-slate-100 rounded-2xl flex flex-col items-center gap-6 max-w-full"
     >
-      <div className="bg-white p-2 flex items-center justify-center min-h-[140px] w-full overflow-x-auto">
+      <div className="bg-white p-4 flex items-center justify-center min-h-[140px] w-full overflow-x-auto border border-slate-50 rounded-xl">
         <svg ref={localRef} className="max-w-full h-auto"></svg>
       </div>
       
       <div className="text-center space-y-1">
-        <div className="text-[10px] sm:text-xs font-mono tracking-[0.5em] font-bold uppercase opacity-60">ID: {id}</div>
-        <div className="text-sm sm:text-base font-black uppercase tracking-widest leading-tight">{name}</div>
+        <div className="text-[10px] font-mono tracking-[0.3em] font-bold uppercase text-slate-400">SERIAL ID: {id}</div>
+        <div className="text-base font-bold text-slate-900 uppercase tracking-tight leading-tight">{name}</div>
       </div>
     </motion.div>
   );
@@ -137,76 +137,78 @@ export default function BarcodeGenerator() {
   };
 
   return (
-    <div className="h-full grid grid-cols-1 md:grid-cols-12 overflow-y-auto">
+    <div className="h-full grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
       {/* Input Section */}
-      <section className="md:col-span-4 border-r-2 border-brand-black p-6 sm:p-10 flex flex-col justify-between bg-brand-muted">
-        <div>
-          <div className="mb-8 sm:mb-12">
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] block mb-2 opacity-40">Step 01</span>
-            <h2 className="text-2xl sm:text-3xl font-black leading-tight uppercase tracking-tight">Product<br/>Specification</h2>
-          </div>
+      <section className="md:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="p-6 border-b border-slate-100 bg-slate-50/50">
+          <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+            <Package className="w-5 h-5 text-blue-600" />
+            Product Registration
+          </h2>
+          <p className="text-xs text-slate-500 mt-1">Populate the fields below to generate a serialized barcode.</p>
+        </div>
 
-          <form onSubmit={handleGenerate} className="space-y-8 sm:space-y-12">
-            <div className="group">
-              <label className="text-[10px] sm:text-[11px] font-black uppercase mb-2 block tracking-[0.15em]">Product Name</label>
+        <form onSubmit={handleGenerate} className="p-6 space-y-6">
+          <div className="space-y-2">
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Product Catalog Name</label>
+            <div className="relative">
+              <Package className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Initialize Name..."
-                className="w-full bg-transparent border-b-2 border-brand-black py-2 text-lg sm:text-xl font-medium focus:outline-none focus:border-brand-orange transition-colors placeholder:opacity-20"
+                placeholder="e.g., Industrial Glass Tube"
+                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                 required
               />
             </div>
+          </div>
 
-            <div className="group">
-              <label className="text-[10px] sm:text-[11px] font-black uppercase mb-2 block tracking-[0.15em]">Product ID / SKU</label>
-              <input
-                type="text"
-                value={id}
-                onChange={(e) => setId(e.target.value)}
-                placeholder="SKU-XXXXX"
-                className="w-full bg-transparent border-b-2 border-brand-black py-2 text-lg sm:text-xl font-mono focus:outline-none focus:border-brand-orange transition-colors placeholder:opacity-20"
-                required
-              />
-            </div>
-
-            <div className="group">
-              <label className="text-[10px] sm:text-[11px] font-black uppercase mb-2 block tracking-[0.15em]">Retail Price (BDT)</label>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Object Serial / SKU</label>
               <div className="relative">
-                <span className="absolute left-0 top-2 text-xl sm:text-3xl font-bold opacity-30">৳</span>
+                <Hash className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                <input
+                  type="text"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                  placeholder="SKU-892"
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
+                  required
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Valuation (BDT)</label>
+              <div className="relative">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400">৳</span>
                 <input
                   type="number"
                   step="0.01"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                   placeholder="0.00"
-                  className="w-full bg-transparent border-b-2 border-brand-black py-2 pl-6 sm:pl-8 text-2xl sm:text-3xl font-bold focus:outline-none focus:border-brand-orange transition-colors placeholder:opacity-20"
+                  className="w-full pl-8 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                   required
                 />
               </div>
             </div>
+          </div>
 
-            <button
-              type="submit"
-              className="w-full py-6 mt-4 bg-brand-black text-white font-black uppercase tracking-[0.2em] hover:bg-brand-orange transition-colors flex justify-between px-6 items-center group cursor-pointer"
-            >
-              <span className="text-xs sm:text-sm">Initialize Sequence</span>
-              <RefreshCw className="w-5 h-5 group-hover:rotate-180 transition-transform duration-500" />
-            </button>
-          </form>
-        </div>
+          <button
+            type="submit"
+            className="w-full py-4 bg-slate-900 text-white font-bold rounded-xl text-sm uppercase tracking-widest hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-lg shadow-slate-200 active:scale-[0.98]"
+          >
+            <RefreshCw className="w-4 h-4" />
+            Generate System Label
+          </button>
+        </form>
       </section>
 
       {/* Preview Section */}
-      <section className="md:col-span-8 bg-white p-6 sm:p-16 flex flex-col relative overflow-hidden">
-        {/* Background Decorative Text */}
-<div className="absolute top-50 left-0 right-0 flex flex-col items-center justify-center opacity-[0.05] pointer-events-none select-none">
-  <span className="text-[60px] sm:text-[60px] font-black leading-none">GenBarcode</span>
-  <span className="text-[60px] sm:text-[60px] font-black leading-none">by (MK)</span>
-</div>
-
-        <div className="flex-1 flex flex-col items-center justify-center relative">
+      <section className="md:col-span-7 flex flex-col gap-6">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[420px] relative overflow-hidden group">
           <AnimatePresence mode="wait">
             {!generated ? (
               <motion.div
@@ -216,13 +218,13 @@ export default function BarcodeGenerator() {
                 exit={{ opacity: 0 }}
                 className="text-center space-y-4"
               >
-                <div className="w-16 h-16 border-2 border-brand-black/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Box className="w-8 h-8 opacity-10" />
+                <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-slate-100">
+                  <Box className="w-8 h-8 text-slate-300" />
                 </div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.3em] opacity-30">Awaiting Sequence...</p>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">System Standby</p>
               </motion.div>
             ) : (
-              <div className="flex flex-col items-center gap-4 w-full max-w-md">
+              <div className="flex flex-col items-center gap-8 w-full">
                 <BarcodeDisplay 
                   value={currentValue} 
                   name={name} 
@@ -230,53 +232,41 @@ export default function BarcodeGenerator() {
                   onRef={(r) => { barcodeRef.current = r; }} 
                 />
 
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  className="flex gap-4 w-full px-2"
-                >
+                <div className="flex gap-3 w-full max-w-sm">
                   <button
                     onClick={downloadBarcode}
-                    className="flex-1 h-14 bg-brand-black text-white text-[10px] font-black uppercase tracking-widest hover:bg-brand-orange transition-colors flex items-center justify-center gap-3 px-4"
+                    className="flex-1 h-12 bg-blue-600 text-white text-[11px] font-bold uppercase tracking-widest rounded-xl hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 shadow-md shadow-blue-100"
                   >
                     <Download className="w-4 h-4" />
-                    <span>Download SVG</span>
+                    Download PNG
                   </button>
                   <button
                     onClick={printBarcode}
-                    className="w-14 h-14 border-2 border-brand-black flex items-center justify-center hover:bg-brand-black hover:text-white transition-all text-brand-black shrink-0"
+                    className="w-12 h-12 bg-slate-100 text-slate-900 rounded-xl flex items-center justify-center hover:bg-slate-200 transition-colors border border-slate-200"
                   >
                     <Printer className="w-5 h-5" />
                   </button>
-                </motion.div>
+                </div>
               </div>
             )}
           </AnimatePresence>
         </div>
 
-        {/* Status Area */}
-        <div className="mt-12 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-8 shrink-0">
-          <div className="flex gap-8 sm:gap-12">
-            <div className="space-y-1 text-left">
-              <span className="block text-[9px] font-black uppercase opacity-40 tracking-tighter">Format</span>
-              <span className="block text-xs sm:text-sm font-bold uppercase tracking-wide">Code 128-B</span>
-            </div>
-            <div className="space-y-1 text-left">
-              <span className="block text-[9px] font-black uppercase opacity-40 tracking-tighter">Resolution</span>
-              <span className="block text-xs sm:text-sm font-bold uppercase tracking-wide">High / 600DPI</span>
-            </div>
-            <div className="space-y-1 text-left">
-              <span className="block text-[9px] font-black uppercase opacity-40 tracking-tighter">Checksum</span>
-              <span className="block text-xs sm:text-sm font-bold uppercase tracking-wide">Active</span>
-            </div>
+        {/* Technical Data Cards */}
+        <div className="grid grid-cols-3 gap-4">
+          <div className="bg-white p-4 rounded-xl border border-slate-200">
+            <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Encoding</span>
+            <span className="block text-xs font-bold text-slate-700">CODE-128</span>
           </div>
-
-          <div className="text-right flex items-center sm:block gap-4">
-            <span className="block text-[9px] font-black uppercase opacity-40 mb-1 tracking-tighter">Status</span>
-            <div className={`flex items-center gap-2 ${generated ? 'text-green-600' : 'text-orange-400 animate-pulse'}`}>
-              <span className="w-2 h-2 rounded-full bg-current"></span>
-              <span className="text-[10px] font-black uppercase tracking-widest">{generated ? 'Ready for Print' : 'Awaiting Input'}</span>
+          <div className="bg-white p-4 rounded-xl border border-slate-200">
+            <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Complexity</span>
+            <span className="block text-xs font-bold text-slate-700">Standard</span>
+          </div>
+          <div className="bg-white p-4 rounded-xl border border-slate-200">
+            <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">Checksum</span>
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+              <span className="block text-xs font-bold text-green-600">Active</span>
             </div>
           </div>
         </div>

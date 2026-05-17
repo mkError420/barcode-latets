@@ -80,46 +80,37 @@ export default function BarcodeScanner() {
   };
 
   return (
-    <div className="h-full grid grid-cols-1 md:grid-cols-12 overflow-y-auto">
+    <div className="h-full grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
       {/* Scanner Section */}
-      <section className="md:col-span-6 border-r-2 border-brand-black p-6 sm:p-10 flex flex-col justify-between bg-brand-muted">
-        <div>
-          <div className="mb-8 sm:mb-12 flex justify-between items-start">
-            <div>
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] block mb-2 opacity-40">Module 02</span>
-              <h2 className="text-2xl sm:text-3xl font-black leading-tight uppercase tracking-tight text-brand-black">Optical<br/>Recognition</h2>
-            </div>
-            <div className="flex items-center gap-2 text-[10px] font-black text-brand-orange uppercase tracking-widest bg-white border border-brand-black px-3 py-1 mt-1">
+      <section className="md:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div className="p-6 border-b border-slate-100 bg-slate-50/50">
+          <div className="flex justify-between items-center">
+            <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <Camera className="w-5 h-5 text-blue-600" />
+              Optical Engine
+            </h2>
+            <div className="flex items-center gap-2 text-[10px] font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
               <ScanLine className="w-3 h-3 animate-pulse" />
               Live
             </div>
           </div>
+          <p className="text-xs text-slate-500 mt-1">Industrial-grade barcode recognition active.</p>
+        </div>
 
-          <div className="relative group">
-            <div id="reader" className="w-full aspect-[4/3] bg-brand-black border-4 border-brand-black shadow-[12px_12px_0px_#121212] flex items-center justify-center overflow-hidden">
-               <Camera className="w-12 h-12 text-white/10" />
-            </div>
-            <div className="absolute inset-0 pointer-events-none border-2 border-brand-orange/30 opacity-50"></div>
+        <div className="p-6 relative group">
+          <div id="reader" className="w-full aspect-[4/3] bg-slate-100 border border-slate-200 rounded-xl flex items-center justify-center overflow-hidden shadow-inner">
+             <Camera className="w-12 h-12 text-slate-300" />
           </div>
-
-          <div className="mt-8 space-y-4">
-            <div className="flex items-center gap-4 p-4 bg-white border-2 border-brand-black">
-              <div className="w-8 h-8 rounded-full border border-brand-black flex items-center justify-center opacity-30 text-[10px] font-bold">i</div>
-              <p className="text-[10px] font-bold uppercase tracking-widest opacity-50">Position barcode within the optical frame for instant processing.</p>
-            </div>
+          <div className="mt-6 flex items-start gap-4 p-4 bg-slate-50 border border-slate-100 rounded-xl">
+            <AlertCircle className="w-5 h-5 text-slate-400 shrink-0" />
+            <p className="text-xs font-medium text-slate-600">Ensure optimal lighting and maintain vertical alignment of the barcode within the digital frame.</p>
           </div>
         </div>
       </section>
 
       {/* Result Section */}
-      <section className="md:col-span-6 bg-white p-6 sm:p-16 flex flex-col relative overflow-hidden">
-        {/* Background Decorative Text */}
-        <div className="absolute top-50 right-0 left-0 flex flex-col items-end opacity-[0.03] pointer-events-none select-none">
-              <span className="text-[60px] sm:text-[60px] font-black leading-none">GenBarcode</span>
-              <span className="text-[60px] sm:text-[60px] font-black leading-none">by (MK)</span>
-        </div>
-
-        <div className="flex-1 flex flex-col items-center justify-center relative">
+      <section className="md:col-span-7 flex flex-col gap-6">
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 sm:p-12 flex flex-col items-center justify-center min-h-[420px] relative overflow-hidden group">
           <AnimatePresence mode="wait">
             {error && (
               <motion.div
@@ -127,9 +118,9 @@ export default function BarcodeScanner() {
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
-                className="bg-brand-orange text-white p-6 border-b-4 border-brand-black font-black uppercase tracking-widest text-xs flex items-center gap-4"
+                className="bg-red-600 text-white p-4 rounded-xl font-bold uppercase tracking-widest text-[10px] flex items-center gap-3 shadow-lg shadow-red-100 mb-6"
               >
-                <AlertCircle className="w-6 h-6" />
+                <AlertCircle className="w-5 h-5" />
                 <span>{error}</span>
               </motion.div>
             )}
@@ -142,42 +133,42 @@ export default function BarcodeScanner() {
                 exit={{ opacity: 0 }}
                 className="text-center space-y-4"
               >
-                <div className="w-20 h-20 border-4 border-dashed border-brand-black/10 flex items-center justify-center mx-auto mb-6">
-                  <Scan className="w-10 h-10 opacity-10 animate-pulse" />
+                <div className="w-20 h-20 bg-slate-50 border border-slate-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                  <Scan className="w-10 h-10 text-slate-200 animate-pulse" />
                 </div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.4em] opacity-30">Awaiting Signal...</p>
+                <p className="text-xs font-bold uppercase tracking-[0.3em] text-slate-300">Awaiting Signal...</p>
               </motion.div>
             ) : (
               <motion.div
                 key="result"
                 initial={{ opacity: 0, scale: 0.95, y: 20 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                className="w-full max-w-md bg-brand-muted border-4 border-brand-black p-8 shadow-[16px_16px_0px_#FF4E00] flex flex-col gap-8"
+                className="w-full max-w-md bg-white border border-slate-200 p-8 rounded-2xl shadow-xl shadow-slate-100 flex flex-col gap-10"
               >
                 <div className="flex justify-between items-start">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-black uppercase tracking-widest opacity-40">System Record</span>
-                    <h3 className="text-2xl font-black uppercase tracking-tight">Decoded Data</h3>
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">System Log Record</span>
+                    <h3 className="text-xl font-bold text-slate-900 tracking-tight">Label Data Decoded</h3>
                   </div>
                   {scannedResult.isExternal && (
-                    <span className="bg-brand-black text-white text-[8px] font-black px-2 py-1 uppercase tracking-tighter">Unregistered Format</span>
+                    <span className="bg-slate-100 text-slate-500 text-[10px] font-bold px-3 py-1 rounded-full border border-slate-200">EXT-SRC</span>
                   )}
                 </div>
 
-                <div className="space-y-6">
-                  <div className="border-b-2 border-brand-black pb-4">
-                    <span className="text-[9px] font-black uppercase opacity-40 tracking-[0.2em] block mb-1">Entity Name</span>
-                    <p className="text-xl font-bold tracking-tight uppercase leading-none">{scannedResult.name}</p>
+                <div className="space-y-8">
+                  <div className="border-b border-slate-100 pb-4">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] block mb-1">Entity Name</span>
+                    <p className="text-2xl font-bold text-slate-900 tracking-tight uppercase leading-none">{scannedResult.name}</p>
                   </div>
 
                   <div className="grid grid-cols-2 gap-8">
-                    <div className="border-b-2 border-brand-black pb-4">
-                      <span className="text-[9px] font-black uppercase opacity-40 tracking-[0.2em] block mb-1">Object ID</span>
-                      <p className="text-lg font-mono font-bold leading-none">{scannedResult.id}</p>
+                    <div className="border-b border-slate-100 pb-4">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] block mb-1">Catalog ID</span>
+                      <p className="text-lg font-mono font-bold text-slate-800 leading-none">{scannedResult.id}</p>
                     </div>
-                    <div className="border-b-2 border-brand-black pb-4">
-                      <span className="text-[9px] font-black uppercase opacity-40 tracking-[0.2em] block mb-1">Value (BDT)</span>
-                      <p className="text-2xl font-black leading-none">
+                    <div className="border-b border-slate-100 pb-4">
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] block mb-1">System Value</span>
+                      <p className="text-3xl font-bold text-slate-900 leading-none">
                         {scannedResult.price === "Unknown" ? "---" : `৳${scannedResult.price}`}
                       </p>
                     </div>
@@ -186,9 +177,9 @@ export default function BarcodeScanner() {
 
                 <button
                   onClick={() => setScannedResult(null)}
-                  className="w-full py-5 bg-brand-black text-white text-xs font-black uppercase tracking-[0.3em] hover:bg-brand-orange transition-colors"
+                  className="w-full py-4 bg-slate-900 text-white text-sm font-bold uppercase tracking-[0.2em] rounded-xl hover:bg-slate-800 transition-all shadow-lg shadow-slate-200"
                 >
-                  Clear Sequence
+                  Reset Scanner
                 </button>
               </motion.div>
             )}
@@ -196,27 +187,29 @@ export default function BarcodeScanner() {
         </div>
 
         {/* Decoder Status */}
-        <div className="mt-12 flex justify-between items-end shrink-0">
-          <div className="flex gap-12">
-            <div className="space-y-1">
-              <span className="block text-[9px] font-black uppercase opacity-40">Protocol</span>
-              <span className="block text-xs font-bold uppercase">Multi-Pass</span>
+        <div className="flex justify-between items-center py-4 px-6 bg-white rounded-xl border border-slate-100">
+          <div className="flex gap-8">
+            <div className="space-y-0.5">
+              <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider">Protocol</span>
+              <span className="block text-xs font-bold text-slate-700">AES-LABEL</span>
             </div>
-            <div className="space-y-1">
-              <span className="block text-[9px] font-black uppercase opacity-40">Buffer</span>
-              <span className="block text-xs font-bold uppercase">Secure</span>
+            <div className="space-y-0.5">
+              <span className="block text-[9px] font-bold text-slate-400 uppercase tracking-wider">Buffer</span>
+              <div className="flex items-center gap-1.5">
+                <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                <span className="block text-xs font-bold text-green-600 uppercase">Synchronized</span>
+              </div>
             </div>
           </div>
           <div className="text-right">
-             <div className="w-32 h-2 bg-brand-muted border border-brand-black relative overflow-hidden">
+             <div className="w-24 h-1.5 bg-slate-100 rounded-full relative overflow-hidden">
                 <motion.div 
-                  className="absolute inset-y-0 left-0 bg-brand-orange"
+                  className="absolute inset-y-0 left-0 bg-blue-500 rounded-full"
                   animate={{ left: ["-100%", "100%"] }}
                   transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-                  style={{ width: "20%" }}
+                  style={{ width: "30%" }}
                 />
              </div>
-             <span className="block text-[9px] font-black uppercase opacity-40 mt-2 tracking-widest">Decoding Engine Active</span>
           </div>
         </div>
       </section>
