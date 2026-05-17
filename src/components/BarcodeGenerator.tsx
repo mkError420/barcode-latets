@@ -201,7 +201,7 @@ export default function BarcodeGenerator() {
             className="w-full py-4 bg-slate-900 text-white font-bold rounded-xl text-sm uppercase tracking-widest hover:bg-slate-800 transition-all flex items-center justify-center gap-2 shadow-lg shadow-slate-200 active:scale-[0.98]"
           >
             <RefreshCw className="w-4 h-4" />
-            Generate System Label
+            Generate Your Bar-Code
           </button>
         </form>
       </section>
