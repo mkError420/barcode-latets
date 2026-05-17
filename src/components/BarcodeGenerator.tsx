@@ -3,7 +3,7 @@ import JsBarcode from 'jsbarcode';
 import { Download, Printer, RefreshCw, Package, Tag, Hash, Box } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const BARCRAFT_PREFIX = "BC1:";
+const BARCRAFT_PREFIX = "GEN";
 
 interface BarcodeDisplayProps {
   value: string;
