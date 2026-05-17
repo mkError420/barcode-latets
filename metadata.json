@@ -1,0 +1,10 @@
+{
+  "name": "BarCraft",
+  "description": "Generate and scan barcodes for product management with ease. Download, print, and retrieve product data instantly.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
