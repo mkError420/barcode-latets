@@ -3,7 +3,7 @@ import { Html5QrcodeScanner, Html5QrcodeSupportedFormats } from 'html5-qrcode';
 import { Camera, Package, Tag, Hash, AlertCircle, ScanLine, Scan } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const BARCRAFT_PREFIX = "BC1:";
+const BARCRAFT_PREFIX = "GEN: ";
 
 interface ScannedProduct {
   name: string;

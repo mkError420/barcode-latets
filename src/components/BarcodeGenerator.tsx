@@ -164,14 +164,14 @@ export default function BarcodeGenerator() {
 
         <form onSubmit={handleGenerate} className="p-6 space-y-6">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Product Catalog Name</label>
+            <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Product Name</label>
             <div className="relative">
               <Package className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="e.g., Industrial Glass Tube"
+                placeholder="e.g., Pickles"
                 className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                 required
               />
@@ -180,14 +180,14 @@ export default function BarcodeGenerator() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Object Serial / SKU</label>
+              <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">Product Serial</label>
               <div className="relative">
                 <Hash className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input
                   type="text"
                   value={id}
                   onChange={(e) => setId(e.target.value)}
-                  placeholder="SKU-892"
+                  placeholder="product ID"
                   className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-mono font-medium focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
                   required
                 />
