@@ -23,7 +23,7 @@ export default function App() {
       {/* Header */}
       <header className="h-20 border-b border-slate-200 flex items-center px-6 sm:px-10 justify-between bg-white shrink-0 sticky top-0 z-50">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-brand-orange rounded-xl flex items-center justify-center text-white shadow-sm">
+          <div className="w-10 h-10 bg-gray-600 rounded-xl flex items-center justify-center text-white shadow-sm">
             <QrCode className="w-6 h-6" />
           </div>
           <div className="flex flex-col">

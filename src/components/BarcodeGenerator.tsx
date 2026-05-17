@@ -142,7 +142,7 @@ export default function BarcodeGenerator() {
       <section className="md:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
         <div className="p-6 border-b border-slate-100 bg-slate-50/50">
           <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-            <Package className="w-5 h-5 text-blue-600" />
+            <Package className="w-5 h-5 text-gray-600" />
             Product Registration
           </h2>
           <p className="text-xs text-slate-500 mt-1">Populate the fields below to generate a serialized barcode.</p>
