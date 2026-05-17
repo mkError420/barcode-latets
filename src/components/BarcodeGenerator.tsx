@@ -3,7 +3,7 @@ import JsBarcode from 'jsbarcode';
 import { Download, Printer, RefreshCw, Package, Tag, Hash, Box } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-const BARCRAFT_PREFIX = "GEN";
+const BARCRAFT_PREFIX = "GEN: ";
 
 interface BarcodeDisplayProps {
   value: string;
@@ -145,7 +145,21 @@ export default function BarcodeGenerator() {
             <Package className="w-5 h-5 text-gray-600" />
             Product Registration
           </h2>
-          <p className="text-xs text-slate-500 mt-1">Populate the fields below to generate a serialized barcode.</p>
+          <button 
+            type="button"
+            onClick={() => {
+              setName('');
+              setId('');
+              setPrice('');
+              setGenerated(false);
+              setCurrentValue('');
+              barcodeRef.current = null;
+            }}
+            className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest hover:text-red-500 transition-colors"
+          >
+            <RefreshCw className="w-3 h-3" />
+            Reset Form
+          </button>
         </div>
 
         <form onSubmit={handleGenerate} className="p-6 space-y-6">
@@ -243,8 +257,22 @@ export default function BarcodeGenerator() {
                   <button
                     onClick={printBarcode}
                     className="w-12 h-12 bg-slate-100 text-slate-900 rounded-xl flex items-center justify-center hover:bg-slate-200 transition-colors border border-slate-200"
+                    title="Print Barcode"
                   >
                     <Printer className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => {
+                      setName('');
+                      setId('');
+                      setPrice('');
+                      setGenerated(false);
+                      setCurrentValue('');
+                    }}
+                    className="w-12 h-12 bg-slate-100 text-red-500 rounded-xl flex items-center justify-center hover:bg-red-50 transition-colors border border-red-100"
+                    title="Reset All"
+                  >
+                    <RefreshCw className="w-5 h-5" />
                   </button>
                 </div>
               </div>
